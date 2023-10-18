@@ -5,18 +5,14 @@ from time import sleep
 
 class Page:
 
-
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 10)
-
 
     def open_url(self, end_url=''):
         url = f'https://soft.reelly.io/{end_url}'
         self.driver.get(url)
         logger.info(f'Opening URL {url}')
-        sleep(2)
-        self.driver.refresh()
 
     def click(self, *locator):
         logger.info(f'clicking on {locator}')
@@ -26,13 +22,18 @@ class Page:
         logger.info(f'searching for {locator}')
         return self.driver.find_element(*locator)
 
-
     def find_elements(self, *locator):
         return self.driver.find_elements(*locator)
 
     def input_text(self, text, *locator):
         e = self.find_element(*locator)
         logger.info(f'inputting text "{text}"')
+        e.send_keys(text)
+
+    def wait_to_input_text(self, text, *locator):
+        e = self.wait.until(EC.presence_of_element_located(locator),
+                            message= f'element not visible: {locator}')
+        logger.info(f'inputting text"{text}')
         e.send_keys(text)
 
     def get_current_window(self):
@@ -54,16 +55,12 @@ class Page:
         print(f'switching to {window_id}')
         self.driver.switch_to.window(window_id)
 
-
-
     def close_page(self):
         self.driver.close()
-
 
     def wait_for_element_clickable(self, *locator):
         self.wait.until(EC.element_to_be_clickable(locator),
              message=f'element not clickable: {locator}')
-
 
     def wait_for_element_clickable_click(self, *locator):
         logger.info(f'clicking on {locator}')
@@ -75,12 +72,9 @@ class Page:
         self.wait.until(EC.invisibility_of_element_located(locator),
                         message=f'element did not disappear: {locator}')
 
-
     def wait_for_element_to_appear(self, *locator):
         self.wait.until(EC.visibility_of_element_located(locator),
                         message=f'element did not appear: {locator}')
-
-
 
     def verify_text(self, expected_text, *locator):
         actual_text = self.find_element(*locator).text

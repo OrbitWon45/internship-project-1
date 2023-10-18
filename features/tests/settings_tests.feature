@@ -2,7 +2,7 @@
 Feature: Settings Tests
 
   Scenario: User can access Whatsapp and Telegram communities
-    Given Open Signin page
+    Given Open Off Plan page
     When Signin
     And Click on settings option
     And Store original window
@@ -13,3 +13,4 @@ Feature: Settings Tests
     And Return to original window
     When Click on news option
     Then Verify news page opens
+

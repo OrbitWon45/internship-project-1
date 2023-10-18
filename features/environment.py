@@ -5,23 +5,35 @@ from selenium.webdriver.chrome.options import Options
 from app.application import Application
 from support.logging import logger
 
-
-
 def browser_init(context, scenario_name):
     """
     :param context: Behave context
     """
 
-    service = Service(executable_path=r'C:\Users\white\Downloads\internship-project\internship-project-1\chromedriver.exe')
-    context.driver = webdriver.Chrome(service=service)
+# Google Chrome
 
-    context.driver.maximize_window()
+    # service = Service(executable_path=r'C:\Users\white\Downloads\internship-project\internship-project-1\chromedriver.exe')
+    # context.driver = webdriver.Chrome(service=service)
+
+# Fire Fox
+
+    service = Service(executable_path=r'C:\Users\white\Downloads\internship-project\internship-project-1\geckodriver.exe')
+    context.driver = webdriver.Firefox(service=service)
+
+    # Headless
+
+    # options = webdriver.ChromeOptions()
+    # options.add_argument('--headless')
+    # service = Service(executable_path=r'C:\Users\white\Downloads\internship-project\internship-project-1\chromedriver.exe')
+    # context.driver = webdriver.Chrome(
+    #     options = options,
+    #     service=service
+    # )
 
     context.driver.maximize_window()
     context.driver.implicitly_wait(4)
     context.driver.wait = WebDriverWait(context.driver, 10)
     context.app = Application(context.driver)
-
 
 def before_scenario(context, scenario):
     print('\nStarted scenario: ', scenario.name)
