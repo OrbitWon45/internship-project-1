@@ -12,17 +12,19 @@ def browser_init(context, scenario_name):
 
 # Google Chrome
 
-    # service = Service(executable_path=r'C:\Users\white\Downloads\internship-project\internship-project-1\chromedriver.exe')
-    # context.driver = webdriver.Chrome(service=service)
+    service = Service(executable_path=r'C:\Users\white\Downloads\internship-project\internship-project-1\chromedriver.exe')
+    context.driver = webdriver.Chrome(service=service)
 
 # Fire Fox
 
-    service = Service(executable_path=r'C:\Users\white\Downloads\internship-project\internship-project-1\geckodriver.exe')
-    context.driver = webdriver.Firefox(service=service)
+    # service = Service(executable_path=r'C:\Users\white\Downloads\internship-project\internship-project-1\geckodriver.exe')
+    # context.driver = webdriver.Firefox(service=service)
 
     # Headless
 
     # options = webdriver.ChromeOptions()
+    # options.add_argument("--window-size=1920,1080")
+    # options.add_argument("--start-maximized")
     # options.add_argument('--headless')
     # service = Service(executable_path=r'C:\Users\white\Downloads\internship-project\internship-project-1\chromedriver.exe')
     # context.driver = webdriver.Chrome(
