@@ -12,15 +12,33 @@ def browser_init(context, scenario_name):
 
 # Google Chrome
 
-    service = Service(executable_path=r'C:\Users\white\Downloads\internship-project\internship-project-1\chromedriver.exe')
-    context.driver = webdriver.Chrome(service=service)
+    # service = Service(executable_path=r'C:\Users\white\Downloads\internship-project\internship-project-1\chromedriver.exe')
+    # context.driver = webdriver.Chrome(service=service)
 
 # Fire Fox
 
     # service = Service(executable_path=r'C:\Users\white\Downloads\internship-project\internship-project-1\geckodriver.exe')
     # context.driver = webdriver.Firefox(service=service)
 
-    # Headless
+### BROWSERSTACK ###
+#Register for BrowserStack, then grab it from https://www.browserstack.com/accounts/settings
+
+    bs_user = 'shaunwhite_zxQ6Zd'
+    bs_key = 'efGxd5uscd6NHSzA8AWy'
+    url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
+
+    options = Options()
+    bstack_options = {
+        'os': "OS X",
+        'osVersion':"Sonoma",
+        "debug": "true",
+        'browserName': 'Chrome',
+        'sessionName': scenario_name
+    }
+    options.set_capability('bstack:options', bstack_options)
+    context.driver = webdriver.Remote(command_executor=url, options=options)
+
+# Headless
 
     # options = webdriver.ChromeOptions()
     # options.add_argument("--window-size=1920,1080")

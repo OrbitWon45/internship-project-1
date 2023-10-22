@@ -8,6 +8,9 @@ class OffPlanPage(Page):
 
     def open_off_plan_page(self):
         self.open_url()
+        #sleep(5)
 
     def click_on_settings(self):
        self.wait_for_element_clickable_click(*self.SETTINGS_BTN)
+
+
