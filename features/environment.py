@@ -12,8 +12,8 @@ def browser_init(context, scenario_name):
 
 # Google Chrome
 
-    # service = Service(executable_path=r'C:\Users\white\Downloads\internship-project\internship-project-1\chromedriver.exe')
-    # context.driver = webdriver.Chrome(service=service)
+    service = Service(executable_path=r'C:\Users\white\Downloads\internship-project\internship-project-1\chromedriver.exe')
+    context.driver = webdriver.Chrome(service=service)
 
 # Fire Fox
 
@@ -23,20 +23,20 @@ def browser_init(context, scenario_name):
 ### BROWSERSTACK ###
 #Register for BrowserStack, then grab it from https://www.browserstack.com/accounts/settings
 
-    bs_user = 'shaunwhite_zxQ6Zd'
-    bs_key = 'efGxd5uscd6NHSzA8AWy'
-    url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
-
-    options = Options()
-    bstack_options = {
-        'os': "OS X",
-        'osVersion':"Sonoma",
-        "debug": "true",
-        'browserName': 'Chrome',
-        'sessionName': scenario_name
-    }
-    options.set_capability('bstack:options', bstack_options)
-    context.driver = webdriver.Remote(command_executor=url, options=options)
+    # bs_user = 'shaunwhite_zxQ6Zd'
+    # bs_key = 'efGxd5uscd6NHSzA8AWy'
+    # url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
+    #
+    # options = Options()
+    # bstack_options = {
+    #     'os': "OS X",
+    #     'osVersion': "Sonoma",
+    #     "debug": "true",
+    #     'browserName': 'Chrome',
+    #     'sessionName': scenario_name
+    # }
+    # options.set_capability('bstack:options', bstack_options)
+    # context.driver = webdriver.Remote(command_executor=url, options=options)
 
 # Headless
 
@@ -51,6 +51,7 @@ def browser_init(context, scenario_name):
     # )
 
     context.driver.maximize_window()
+
     context.driver.implicitly_wait(4)
     context.driver.wait = WebDriverWait(context.driver, 10)
     context.app = Application(context.driver)
