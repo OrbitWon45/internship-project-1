@@ -9,6 +9,7 @@ class SigninPage(Page):
     EMAIL_FIELD = (By.ID, "email-2")
     PASSWORD_FIELD = (By.ID, 'field')
     CONTINUE_BTN = (By.XPATH, '//a[@class="login-button w-button"]')
+    MOBILE_MENU_BTN = (By.CSS_SELECTOR, 'a.menu-button-wrapper.w-inline-block')
 
     def email_field(self):
         text = '4softwaretesting1@gmail.com'
@@ -23,6 +24,8 @@ class SigninPage(Page):
         self.wait.until(EC.text_to_be_present_in_element_value(password, 'Bekywon1!'),
                         message=f'no text in {password}')
         self.click(*self.CONTINUE_BTN)
+
+
 
 
 

@@ -16,6 +16,11 @@ def click_on_news_option(context):
     context.app.settings_page.click_on_news_option()
 
 
+@when('Click on news option mobile')
+def click_on_news_option_mobile(context):
+    context.app.settings_page.click_on_news_option_mobile()
+
+
 
 @then('Return to original window')
 def return_to_original_window(context):

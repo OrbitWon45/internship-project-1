@@ -10,3 +10,8 @@ def open_off_plan_page(context):
 @when('Click on settings option')
 def click_on_settings(context):
     context.app.off_plan_page.click_on_settings()
+
+
+@when('Click on menu option mobile')
+def click_on_menu(context):
+    context.app.off_plan_page.click_on_menu_mobile()

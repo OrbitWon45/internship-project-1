@@ -12,31 +12,64 @@ def browser_init(context, scenario_name):
 
 # Google Chrome
 
-    service = Service(executable_path=r'C:\Users\white\Downloads\internship-project\internship-project-1\chromedriver.exe')
-    context.driver = webdriver.Chrome(service=service)
+    # service = Service(executable_path=r'C:\Users\white\Downloads\internship-project\internship-project-1\chromedriver.exe')
+    # context.driver = webdriver.Chrome(service=service)
 
 # Fire Fox
 
     # service = Service(executable_path=r'C:\Users\white\Downloads\internship-project\internship-project-1\geckodriver.exe')
     # context.driver = webdriver.Firefox(service=service)
 
+# Mobile Chrome
+
+    # mobile_emulation = {
+    #
+    #     "deviceMetrics": {"width": 360, "height": 640, "pixelRatio": 3.0},
+    #
+    #     "userAgent": "Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19",
+    #
+    #     "clientHints": {"platform": "Android", "mobile": True}}
+    #
+    # options = Options()
+    #
+    # options.add_experimental_option("mobileEmulation", mobile_emulation)
+    #
+    # context.driver = webdriver.Chrome(options=options
+    # )
+
+# Mobile Chrome 1
+
+    # mobile_emulation = {"deviceName": "Samsung Galaxy S8+"}
+    #
+    # options = webdriver.ChromeOptions()
+    #
+    # options.add_experimental_option("mobileEmulation", mobile_emulation)
+    #
+    # service = Service(
+    #     executable_path=r'C:\Users\white\Downloads\internship-project\internship-project-1\chromedriver.exe')
+    # context.driver = webdriver.Chrome(
+    #     options = options,
+    #     service=service
+    # )
+
 ### BROWSERSTACK ###
 #Register for BrowserStack, then grab it from https://www.browserstack.com/accounts/settings
 
-    # bs_user = 'shaunwhite_zxQ6Zd'
-    # bs_key = 'efGxd5uscd6NHSzA8AWy'
-    # url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
-    #
-    # options = Options()
-    # bstack_options = {
-    #     'os': "OS X",
-    #     'osVersion': "Sonoma",
-    #     "debug": "true",
-    #     'browserName': 'Chrome',
-    #     'sessionName': scenario_name
-    # }
-    # options.set_capability('bstack:options', bstack_options)
-    # context.driver = webdriver.Remote(command_executor=url, options=options)
+    bs_user = 'shaunwhite_zxQ6Zd'
+    bs_key = 'efGxd5uscd6NHSzA8AWy'
+    url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
+
+    options = Options()
+    bstack_options = {
+        "osVersion": "8.1",
+        "deviceName": "Samsung Galaxy Note 9",
+        "local": "false",
+        "debug": "true",
+        'browserName': 'Chrome',
+        'sessionName': scenario_name
+    }
+    options.set_capability('bstack:options', bstack_options)
+    context.driver = webdriver.Remote(command_executor=url, options=options)
 
 # Headless
 
@@ -50,7 +83,7 @@ def browser_init(context, scenario_name):
     #     service=service
     # )
 
-    context.driver.maximize_window()
+    #context.driver.maximize_window()
 
     context.driver.implicitly_wait(4)
     context.driver.wait = WebDriverWait(context.driver, 10)
